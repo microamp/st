@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-char font[] = "DejaVu Sans Mono:pixelsize=14:antialias=true:autohint=true";
+char font[] = "DejaVu Sans Mono:pixelsize=13:antialias=true:autohint=true";
 int borderpx = 2;
 
 /*
@@ -85,41 +85,47 @@ static unsigned int tabspaces = 8;
 /* Terminal colors (16 first used in escape sequence) */
 const char *colorname[] = {
 	/* 8 normal colors */
-	"#222222",
-	"#825b69",
-	"#69825b",
-	"#82755b",
-	"#5b6982",
-	"#755b82",
-	"#5b8275",
-	"#cacaca",
+	[0] = "#130f06", /* black   */
+	[1] = "#ee4233", /* red     */
+	[2] = "#9acd32", /* green   */
+	[3] = "#ffd700", /* yellow  */
+	[4] = "#5d7f8c", /* blue    */
+	[5] = "#db7093", /* magenta */
+	[6] = "#2f4f4f", /* cyan    */
+	[7] = "#feffea", /* white   */
 
 	/* 8 bright colors */
-	"#222222",
-	"#bda0aa",
-	"#aabda0",
-	"#bdb3a0",
-	"#a0aabd",
-	"#b3a0bd",
-	"#a0bdb3",
-	"#ffffff",
+	[8]  = "#130f06", /* black   */
+	[9]  = "#ee4233", /* red     */
+	[10] = "#9acd32", /* green   */
+	[11] = "#ffd700", /* yellow  */
+	[12] = "#5d7f8c", /* blue    */
+	[13] = "#db7093", /* magenta */
+	[14] = "#2f4f4f", /* cyan    */
+	[15] = "#feffea", /* white   */
 
-	[255] = 0,
-
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
+	/* special colors */
+	[256] = "#feffea", /* background */
+	[257] = "#130f06", /* foreground */
+        [258] = "#7c6b54", /* cursor */
 };
-
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
-unsigned int defaultcs = 256;
-unsigned int defaultrcs = 257;
+unsigned int defaultfg = 257;
+unsigned int defaultbg = 256;
+unsigned int defaultcs = 258;
+unsigned int defaultrcs = 256;
+
+/*
+ * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ * will reverse too. Another logic would only make the simple feature too
+ * complex.
+ */
+unsigned int defaultitalic = 7;
+unsigned int defaultunderline = 7;
 
 /*
  * Default shape of cursor
